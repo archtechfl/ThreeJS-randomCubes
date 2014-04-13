@@ -24,7 +24,8 @@ function threeApp () {
 	document.body.appendChild(renderer.domElement);
 	
 	var dimRec = 0.03;
-	var geometry = new THREE.CubeGeometry(dimRec,dimRec,dimRec);//making the cubes that go in scene
+	//var geometry = new THREE.CubeGeometry(dimRec,dimRec,dimRec);//making the cubes that go in scene
+	var geometry = new THREE.SphereGeometry( dimRec, 16, 16 );
 	
 	//var material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe:true } );
 	
@@ -45,12 +46,6 @@ function threeApp () {
 		var jemCube = new THREE.Mesh( geometry, material );
 		
 		//Set X coordinate
-		var plusMinusX = Math.random();
-		if (plusMinusX < 0.5){
-			plusMinusX = -1;
-		} else {
-			plusMinusX = 1;
-		}
 		
 		var xC = ((Math.random())* 30.0) + 30;
 		
@@ -58,6 +53,7 @@ function threeApp () {
 		//Done with X
 		
 		//Set y coordinate
+		
 		var plusMinusY = Math.random();
 		if (plusMinusY < 0.5){
 			plusMinusY = -1;
@@ -77,9 +73,6 @@ function threeApp () {
 		
 		jemCube.position.z = zC;
 		
-		jemCube.xSpeed = Math.random() * 0.3;
-		//console.log(jemCube.xSpeed);//Debug random speed
-		
 		cubes.add( jemCube );//Add the cube to the Object3D object
 		}
 	}//end of generate cubes
@@ -88,19 +81,11 @@ function threeApp () {
 	
 	scene.add(cubes);//Add the cubes Object3D object to the scene object
 
-	camera.position.z = 5;
+	camera.position.z = 0;
 	
 	xSpeed = -0.15;
 	
 	var frameCounter = 0;
-	
-	//var myTimer = setInterval(timerDisplay,1000);
-	
-	var timerCounter = 0;
-	function timerDisplay () {
-		timerCounter += 1;
-		//console.log(timerCounter);
-	}
 
 	function render() 
 		{
@@ -125,7 +110,6 @@ function threeApp () {
 		for (i=0; i<cubes.children.length; i++){
 		
 			cubes.children[i].position.x += xSpeed;
-			//console.log("Cube speed: " + cubes.children[i].xSpeed);
 			
 			if (cubes.children[i].position.x  <= -40)
 				{
