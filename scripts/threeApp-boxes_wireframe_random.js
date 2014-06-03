@@ -1,6 +1,4 @@
-// JavaScript Document
-
-console.log("At threeApp.js");
+// Random wireframed boxes in 3D space
 
 function threeApp () {
 
