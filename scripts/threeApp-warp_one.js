@@ -1,8 +1,6 @@
 // JavaScript Document
 
-// warp speed, stars coming at you
-
-console.log("At threeApp.js");
+// Warp One
 
 function threeApp () {
 
@@ -23,12 +21,12 @@ function threeApp () {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild(renderer.domElement);
 	
-	var dimRec = 0.03;
-	var geometry = new THREE.CubeGeometry(dimRec,dimRec,dimRec);//making the cubes that go in scene
-	
-	//var material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe:true } );
+	var geometry = new THREE.CubeGeometry(0.03,0.03,0.03);//making the cubes that go in scene
 	
 	var material = new THREE.MeshLambertMaterial( { color: 0xBABABA, shading: THREE.FlatShading} );
+	
+	//Temporary holding container for THREE.mesh objects
+	var cubeContainer = new Object();
 	
 	//The location variables
 	var xC;
@@ -39,10 +37,9 @@ function threeApp () {
 	var cubes = new THREE.Object3D();
 	cubes.name = "cubes";
 	
-	function generateCubes(){
-	
-		for (c=0; c<10; c++){
-		var jemCube = new THREE.Mesh( geometry, material );
+	//Loop for cube position setting
+	for (c=0; c<20000; c++){
+		cubeContainer["cube" + c] = new THREE.Mesh( geometry, material );
 		
 		//Set X coordinate
 		var plusMinusX = Math.random();
@@ -52,9 +49,10 @@ function threeApp () {
 			plusMinusX = 1;
 		}
 		
-		var xC = ((Math.random())* 30) * plusMinusX;
+		var xC = (Math.random())*15;
+		xC = xC * plusMinusX;
 		
-		jemCube.position.x = xC;
+		cubeContainer["cube" + c].position.x = xC;
 		//Done with X
 		
 		//Set y coordinate
@@ -65,52 +63,38 @@ function threeApp () {
 			plusMinusY = 1;
 		}
 		
-		var yC = (Math.random())*30;
+		var yC = (Math.random())*5;
 		yC = yC * plusMinusY;
 		
-		jemCube.position.y = yC;
+		cubeContainer["cube" + c].position.y = yC;
 		//Done with Y
 		
 		//Set z coordinate
-		var zC = (((Math.random())*200) + 50) * -1;
+		var zC = (((Math.random())*100) + 2) * -1;
 		//Done with z
 		
-		jemCube.position.z = zC;
+		cubeContainer["cube" + c].position.z = zC;
 		
-		cubes.add( jemCube );//Add the cube to the Object3D object
-		}
-	}//end of generate cubes
+		cubes.add( cubeContainer["cube" + c] );//Add the cube to the Object3D object
+	}
 	
 	var xSpeed;
 	
 	scene.add(cubes);//Add the cubes Object3D object to the scene object
+	
+	console.log(cubes.children);
 
 	camera.position.z = 5;
 	
-	zSpeed = 0.55;
-	
-	var frameCounter = 0;
-	
-	//var myTimer = setInterval(timerDisplay,1000);
-	
-	var timerCounter = 0;
-	function timerDisplay () {
-		timerCounter += 1;
-		//console.log(timerCounter);
-	}
+	zSpeed = 0.2;
 
 	function render() 
 		{
 			requestAnimationFrame(render);
-			
-			generateCubes();
 		
 			movement();
 			
 			renderer.render(scene, camera);
-			
-			frameCounter++;
-			console.log("Frame: " + frameCounter + " Number of cubes: " + cubes.children.length);
 			
 		}
 
@@ -122,12 +106,6 @@ function threeApp () {
 		for (i=0; i<cubes.children.length; i++){
 		
 			cubes.children[i].position.z += zSpeed;
-			//console.log(cubes.children[0]);//Identify child in the cubes object
-			
-			if (cubes.children[i].position.z >= 100)
-				{
-					cubes.remove(cubes.children[i]);
-				}
 			
 		}
 		
