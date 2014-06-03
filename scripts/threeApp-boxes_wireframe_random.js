@@ -12,13 +12,9 @@ function threeApp () {
 	document.body.appendChild(renderer.domElement);
 	
 	var geometry = new THREE.CubeGeometry(2,2,2);
-	
-	var geo10 = new THREE.CubeGeometry(2,2,2);
-	
+		
 	var material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe:true } );
-	
-	var materialCenter = new THREE.MeshBasicMaterial( { color: 0xFF0000 } );
-	
+		
 	var cubeContainer = new Object();
 	
 	var xC;
@@ -61,20 +57,10 @@ function threeApp () {
 		cubeContainer["cube" + c].position.z = zC;
 		cubes2.add( cubeContainer["cube" + c] );
 	}
-	
-	//console.log(cubeContainer);
-	
-	var cube10 = new THREE.Mesh( geo10, material );
-	
+
 	var xSpeed;
 	
 	scene.add(cubes2);
-	
-	cube10.position.z = -50;
-	cube10.position.y = 5;
-	cube10.position.x = -12;
-	
-	//scene.add(cube10);
 	
 	camera.position.z = 5;
 	
@@ -84,18 +70,7 @@ function threeApp () {
 	function render() 
 		{
 			requestAnimationFrame(render);
-			
-			/*
-			for (i=0; i<cubes2.children.length; i++){
-			
-				if (cubes2.children[i].position.x  >= 15 || cubes2.children[i].position.x  <= -15){
-					xSpeed *= -1;
-				} 
-				
-			}
-			*/
-			
-			
+
 			movement();
 			
 			renderer.render(scene, camera);
