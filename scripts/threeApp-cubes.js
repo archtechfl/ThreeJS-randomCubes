@@ -20,11 +20,7 @@ function threeApp () {
 	document.body.appendChild(renderer.domElement);
 	
 	var geometry = new THREE.CubeGeometry(2,2,2);
-	
-	var geo10 = new THREE.CubeGeometry(2,2,2);
-	
-	//var material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe:true } );
-	
+			
 	var material = new THREE.MeshLambertMaterial( { color: 0xBABABA, shading: THREE.FlatShading} );
 		
 	var cubeContainer = new Object();
