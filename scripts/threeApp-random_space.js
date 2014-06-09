@@ -19,7 +19,7 @@ function threeApp () {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild(renderer.domElement);
 	
-	var geoSize = 0.015;
+	var geoSize = 0.03;
 	
 	var geometry = new THREE.CubeGeometry(geoSize,geoSize,geoSize);
 	
@@ -69,7 +69,7 @@ function threeApp () {
 			plusMinusZ = 1;
 		}
 		
-		var zC = (Math.random())*300;
+		var zC = Math.random() * 100;
 		zC = zC * plusMinusZ;
 		
 		cubeContainer["cube" + c].position.z = zC;
@@ -80,7 +80,7 @@ function threeApp () {
 	
 	scene.add(cubes2);
 
-	camera.position.z = -250;
+	camera.position.z = 0;
 
 	function render() 
 		{
